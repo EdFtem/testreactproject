@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './App.scss';
-import { ProductItem, ProductList, AddProductItemForm } from './components';
+import { ProductItem, ProductList, AddProductItemForm, ApplicationHeader } from './components';
 import { Product, AddProduct, RemoveProduct } from './types.d';
+import { Layout, Menu, Breadcrumb } from 'antd';
+
+const { Content, Footer } = Layout;
 
 const initialProducts: Array<Product> = [
   {
@@ -41,10 +44,19 @@ const App = () => {
   }
 
   return (
-    <div className="MainContainer">
-      <AddProductItemForm addProduct = {addProduct}/>
-      <ProductList products = {products} removeProduct = {removeProduct}/>
-    </div>
+    <Layout className="layout">
+      <ApplicationHeader/>
+      <Content style={{ padding: '0 50px' }}>
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+        </Breadcrumb>
+        <div className="site-layout-content">
+          <AddProductItemForm addProduct = {addProduct}/>
+          <ProductList products = {products} removeProduct = {removeProduct}/>
+        </div>       
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>Product List ©2020 Created by Eduard Ftemov</Footer>
+    </Layout>
   );
 }
 
