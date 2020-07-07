@@ -6,3 +6,5 @@ export type Product = {
     Price: number,
     ImageURL: string
 };
+
+export type AddProduct = (addProduct: Product) => void;

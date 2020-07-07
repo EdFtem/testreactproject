@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
-import { ProductItem } from './components';
-import { Product } from './types.d';
-import { ProductList } from './components/product-item-list';
+import { ProductItem, ProductList, AddProductItemForm } from './components';
+import { Product, AddProduct } from './types.d';
 
-const products: Array<Product> = [
+const initialProducts: Array<Product> = [
   {
     Id: 1,
     Title: "Super test",
@@ -24,8 +23,17 @@ const products: Array<Product> = [
 ];
 
 const App = () => {
+  const [products, setProducts] = useState(initialProducts);
+
+  const addProduct: AddProduct = newProduct => {
+    const lastId = products[products.length - 1].Id;
+    newProduct.Id = lastId + 1;
+    setProducts([...products, newProduct]);
+  }
+
   return (
     <div className="MainContainer">
+      <AddProductItemForm addProduct = {addProduct}/>
       <ProductList products = {products}/>
     </div>
   );
