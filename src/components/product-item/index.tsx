@@ -1,12 +1,13 @@
 import React from 'react';
 import './index.scss';
-import { Product } from '../../types.d';
+import { Product, RemoveProduct } from '../../types.d';
 
 interface ProductListItem {
   product : Product;
+  removeProduct : RemoveProduct;
 }
 
-export const ProductItem: React.FC<ProductListItem> = ({ product }) => {
+export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct }) => {
   return (
     <div className="InfoContainer">
      <div className="ProductInfoContainer">
@@ -29,6 +30,7 @@ export const ProductItem: React.FC<ProductListItem> = ({ product }) => {
      <div className="ImageContainer">
       <img alt="option" src="#"></img>
      </div>
+     <button onClick={() => removeProduct(product)}> Remove </button>
     </div>
   );
 }

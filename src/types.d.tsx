@@ -8,3 +8,5 @@ export type Product = {
 };
 
 export type AddProduct = (addProduct: Product) => void;
+
+export type RemoveProduct = (removeProduct: Product) => void;
