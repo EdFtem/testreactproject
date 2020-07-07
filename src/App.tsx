@@ -26,8 +26,9 @@ const App = () => {
   const [products, setProducts] = useState(initialProducts);
 
   const addProduct: AddProduct = newProduct => {
-    const lastId = products[products.length - 1]?.Id;
-    newProduct.Id = lastId + 1;
+    const lastProduct = products[products.length - 1];
+    const id = lastProduct != null ? lastProduct.Id + 1 : 1;
+    newProduct.Id = id;
     setProducts([...products, newProduct]);
   }
 
