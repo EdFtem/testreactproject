@@ -38,10 +38,10 @@ export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct,
           {product.Description}
         </p>
         <p className="product-info-item">
-          {product.Price}
+          Price: {product.Price}
         </p>
-        <p className="product-info-item">
-          {product.Quantity}
+        <p className="product-info-item" style={{ color: product.Quantity > 0 ? '' : 'red'}}>
+          Quantity: {product.Quantity}
         </p>
       </div>
       
