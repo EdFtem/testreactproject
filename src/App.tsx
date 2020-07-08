@@ -9,19 +9,19 @@ const { Content, Footer } = Layout;
 const initialProducts: Array<Product> = [
   {
     Id: 1,
-    Title: "Super test",
-    Description: "Text text text text text",
+    Title: "Lamborghini",
+    Description: "Automobili Lamborghini is an Italian brand and manufacturer of luxury sports cars and SUVs based in Sant'Agata Bolognese. The company is owned by the Volkswagen Group.",
     Price: 10,
     Quantity: 1,  
-    ImageURL: "test" 
+    ImageURL: "https://images.pexels.com/photos/3802508/pexels-photo-3802508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" 
   },
   {
     Id: 2,
-    Title: "Super test 2",
-    Description: "Text text text text text 2",
+    Title: "Ford Mustang",
+    Description: "The Ford Mustang is a series of American automobiles manufactured by Ford. In continuous production since 1964, the Mustang is currently the longest-produced Ford car nameplate.",
     Price: 11,
     Quantity: 3,  
-    ImageURL: "test 2" 
+    ImageURL: "https://images.pexels.com/photos/733745/pexels-photo-733745.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" 
   }
 ];
 

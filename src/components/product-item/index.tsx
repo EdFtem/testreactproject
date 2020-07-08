@@ -1,7 +1,7 @@
 import React, {useState, MouseEvent} from 'react';
 import './index.scss';
 import { Product, RemoveProduct, IncreaseProductCount, ReduceProductCount } from '../../types.d';
-import { Card } from 'antd';
+import { Card, Avatar } from 'antd';
 import { MinusCircleOutlined, DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 interface ProductListItem {
@@ -11,37 +11,38 @@ interface ProductListItem {
   reduceProductCount: ReduceProductCount;
 }
 
-export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct, increaseProductCount, reduceProductCount }) => {
+const { Meta } = Card;
 
+export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct, increaseProductCount, reduceProductCount }) => { 
+  
   return (   
     <Card 
       title={product.Title} 
-      style={{ margin: 10 }}
+      style={{ margin: 10 , background: product.Quantity > 0 ? '' : '#dae0e7'}}
       actions={[
         <PlusCircleOutlined onClick= { () => increaseProductCount(product) }/>,
         <MinusCircleOutlined onClick= { () => reduceProductCount(product) }/>,
         <DeleteOutlined onClick={() => removeProduct(product)}/>
       ]}
     >
-      <div className={"product-info-container" + (product.Quantity > 0 ? '' : '-faded')}>
-        <p className="ProductsInfoItem">
-          {product.Id}
-        </p>
-        <p className="ProductsInfoItem">
+
+    <Meta
+      avatar={<Avatar src={product.ImageURL} size={64} />}
+      title={product.Id}
+    />
+      <div className="product-info-container">
+        <p className="product-info-item">
           {product.Title}
         </p>
-        <p className="ProductsInfoItem">
+        <p className="product-info-item">
           {product.Description}
         </p>
-        <p className="ProductsInfoItem">
+        <p className="product-info-item">
           {product.Price}
         </p>
-        <p className="ProductsInfoItem">
+        <p className="product-info-item">
           {product.Quantity}
         </p>
-        <div className="ImageContainer">
-          <img alt="option" src="#"></img>
-        </div>
       </div>
       
     </Card>

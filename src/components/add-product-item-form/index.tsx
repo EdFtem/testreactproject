@@ -7,6 +7,15 @@ interface AddProductFormProps {
     addProduct: AddProduct;
 }
 
+const layout = {
+    labelCol: {
+      span: 2,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+
 export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} ) => {
     const [newProduct, setNewProduct] = useState({
         title: "",
@@ -37,7 +46,7 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
     };
 
     return (
-        <Form>
+        <Form {...layout}>
             <Form.Item label="Title">
             <Input 
                 type="text" 
@@ -82,7 +91,7 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
                 onChange={handleChange}
             />
             </Form.Item>
-            <Form.Item>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
                 <button 
                 onClick={handleSubmit}>
                     Submit
