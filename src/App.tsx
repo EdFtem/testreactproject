@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.scss';
 import { ProductItem, ProductList, AddProductItemForm, ApplicationHeader } from './components';
-import { Product, AddProduct, RemoveProduct } from './types.d';
+import { Product, AddProduct, RemoveProduct, IncreaseProductCount, ReduceProductCount } from './types.d';
 import { Layout, Menu, Breadcrumb } from 'antd';
 
 const { Content, Footer } = Layout;
@@ -43,6 +43,32 @@ const App = () => {
     setProducts([...products]);
   }
 
+  const increaseProductCount: IncreaseProductCount = selectedProduct => {
+    const newProduct = products.map(product => {
+      if(product === selectedProduct) {
+        product.Quantity++;
+        return {
+          ...product
+        };
+      }
+      return product;
+    });
+    setProducts(newProduct);
+  }
+
+  const reduceProductCount: ReduceProductCount = selectedProduct => {
+    const newProduct = products.map(product => {
+      if(product === selectedProduct) {
+        product.Quantity = product.Quantity - 1;
+        return {
+          ...product
+        };
+      }
+      return product;
+    });
+    setProducts(newProduct);
+  }
+
   return (
     <Layout className="layout">
       <ApplicationHeader/>
@@ -52,7 +78,12 @@ const App = () => {
         </Breadcrumb>
         <div className="site-layout-content">
           <AddProductItemForm addProduct = {addProduct}/>
-          <ProductList products = {products} removeProduct = {removeProduct}/>
+          <ProductList 
+            products = {products} 
+            removeProduct = {removeProduct} 
+            increaseProductCount = {increaseProductCount} 
+            reduceProductCount = {reduceProductCount}
+          />
         </div>       
       </Content>
       <Footer style={{ textAlign: 'center' }}>Product List ©2020 Created by Eduard Ftemov</Footer>

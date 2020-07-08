@@ -10,3 +10,7 @@ export type Product = {
 export type AddProduct = (addProduct: Product) => void;
 
 export type RemoveProduct = (removeProduct: Product) => void;
+
+export type IncreaseProductCount = (increaseProductCount: Product) => void; 
+
+export type ReduceProductCount = (reduceProductCount: Product) => void;
