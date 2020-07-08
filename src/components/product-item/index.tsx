@@ -23,7 +23,7 @@ export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct,
         <DeleteOutlined onClick={() => removeProduct(product)}/>
       ]}
     >
-      <div className="ProductInfoContainer">
+      <div className={"product-info-container" + (product.Quantity > 0 ? '' : '-faded')}>
         <p className="ProductsInfoItem">
           {product.Id}
         </p>

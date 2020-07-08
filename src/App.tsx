@@ -59,7 +59,7 @@ const App = () => {
   const reduceProductCount: ReduceProductCount = selectedProduct => {
     const newProduct = products.map(product => {
       if(product === selectedProduct) {
-        product.Quantity = product.Quantity - 1;
+        product.Quantity = product.Quantity - 1 < 0 ? 0 : product.Quantity - 1;
         return {
           ...product
         };
