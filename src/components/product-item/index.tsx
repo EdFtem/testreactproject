@@ -40,9 +40,15 @@ export const ProductItem: React.FC<ProductListItem> = ({ product, removeProduct,
         <p className="product-info-item">
           Price: {product.Price}
         </p>
+        <div style={{display: "flex", flexDirection : "row"}}>
+
         <p className="product-info-item" style={{ color: product.Quantity > 0 ? '' : 'red'}}>
           Quantity: {product.Quantity}
         </p>
+        { product.Quantity === 0 &&
+          <p style={{color: "red", marginLeft: "15px"}}> Out of stock!</p>
+        }
+        </div>
       </div>
       
     </Card>

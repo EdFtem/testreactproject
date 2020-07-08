@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import 'antd/dist/antd.css';
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { Product, AddProduct } from '../../types.d';
 
 interface AddProductFormProps {
@@ -33,7 +33,11 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
         });
     };
 
-    const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+    const isBlank = (str : string) => {
+        return (!str || /^\s*$/.test(str));
+    }
+
+    const handleSubmit = () => {
         let product: Product = {
             Id: 0,
             Title: newProduct.title,
@@ -42,12 +46,28 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             Price: newProduct.price,
             Quantity: newProduct.quantity
         }
-        addProduct(product);
+        if(!isBlank(product.Title) && !isBlank(product.Description)){
+            addProduct(product);
+            setNewProduct({
+                title: "",
+                description: "",
+                quantity: 0,
+                price: 0,
+                imageURL: ""
+            });
+        }    
     };
 
     return (
         <Form {...layout}>
-            <Form.Item label="Title">
+            <Form.Item label="Title"
+                name="title"
+                rules={[
+                {
+                    required: true,
+                },
+                ]}
+            >
             <Input 
                 type="text" 
                 name="title"
@@ -56,7 +76,14 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
 
-            <Form.Item label="Description">
+            <Form.Item label="Description"
+                name="description"
+                rules={[
+                {
+                    required: true,
+                },
+                ]}
+            >
             <Input 
                 type="text"
                 name="description"
@@ -92,10 +119,10 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
-                <button 
+                <Button type="primary" htmlType="submit"
                 onClick={handleSubmit}>
                     Submit
-                </button>
+                </Button>
             </Form.Item>
         </Form>
     );
