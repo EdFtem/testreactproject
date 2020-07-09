@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
 import { Product, AddProduct } from '../../types.d';
+import { FormInstance } from 'antd/lib/form';
 
 interface AddProductFormProps {
     addProduct: AddProduct;
@@ -16,6 +17,8 @@ const layout = {
     },
   };
 
+const formRef = React.createRef<FormInstance>();
+
 export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} ) => {
     const [newProduct, setNewProduct] = useState({
         title: "",
@@ -24,7 +27,7 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
         price: 0,
         imageURL: ""
     });
-
+    
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setNewProduct({
@@ -48,6 +51,7 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
         }
         if(!isBlank(product.Title) && !isBlank(product.Description)){
             addProduct(product);
+            
             setNewProduct({
                 title: "",
                 description: "",
@@ -55,12 +59,14 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
                 price: 0,
                 imageURL: ""
             });
+            formRef.current?.resetFields();
         }    
     };
 
     return (
-        <Form {...layout}>
-            <Form.Item label="Title"
+        <Form {...layout} ref={formRef} onFinish={handleSubmit}>
+            <Form.Item 
+                label="Title"
                 name="title"
                 rules={[
                 {
@@ -76,7 +82,8 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
 
-            <Form.Item label="Description"
+            <Form.Item 
+                label="Description"
                 name="description"
                 rules={[
                 {
@@ -92,7 +99,15 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
 
-            <Form.Item label="Quantity">
+            <Form.Item 
+                label="Quantity"
+                name="quantity"
+                rules={[
+                {
+                    required: true,
+                },
+                ]}
+            >
             <Input 
                 type="number"
                 name="quantity"
@@ -101,7 +116,15 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
 
-            <Form.Item label="Price">
+            <Form.Item 
+                label="Price"
+                name="price"
+                rules={[
+                {
+                    required: true,
+                },
+                ]}
+            >
             <Input 
                 type="number"
                 name="price"
@@ -119,8 +142,7 @@ export const AddProductItemForm: React.FC<AddProductFormProps> = ( {addProduct} 
             />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
-                <Button type="primary" htmlType="submit"
-                onClick={handleSubmit}>
+                <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
             </Form.Item>
